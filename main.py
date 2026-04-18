@@ -1,30 +1,18 @@
-import telebot
-import time
+# Updated main.py
 
-# آپ کا ٹوکن
-TOKEN = '8654369776:AAGa0FvxyKG65E8AiQCEpZc57Iiy0ulFCKk'
+import os
 
-# آپ کے پبلک چینل کا یوزرنیم (ایسا ہی ہونا چاہیے)
-CHAT_ID = '@FS_Panther_Official'
+# Retrieve environment variable for the bot token
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 
-bot = telebot.TeleBot(TOKEN)
+# State tracking for signals
+signals_state = {}  # Dictionary to track the state of signals
 
-def send_signal(message):
-    try:
-        bot.send_message(CHAT_ID, message, parse_mode="Markdown")
-        print("Signal sent successfully!")
-    except Exception as e:
-        print(f"Error: {e}")
+# Function to update signal state
 
-# بوٹ سٹارٹ کا میسج
-print("FS Panther Bot is now Active!")
-try:
-    bot.send_message(CHAT_ID, "🚀 *FS Panther Bot is Online & Running 24/7!*")
-except:
-    print("Could not send startup message. Is the bot Admin in the channel?")
+def update_signal(signal_name, state):
+    signals_state[signal_name] = state
+    print(f"Signal '{signal_name}' updated to {state}")
 
-# مین لوپ
-while True:
-    # یہاں آپ اپنی ٹریڈنگ سگنل لاجک شامل کر سکتے ہیں
-    time.sleep(60)
-  
+# Example usage
+# update_signal('signal1', True)
